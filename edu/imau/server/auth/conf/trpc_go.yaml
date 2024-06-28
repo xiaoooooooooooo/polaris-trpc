@@ -1,0 +1,27 @@
+client:
+  service:
+    - name: edu.imau.pb.UserService
+      #      target: ip://127.0.0.1:8002
+      target: polarismesh://edu.imau.pb.UserService
+      namespace: zwx-test
+      network: tcp
+      protocol: trpc
+      timeout: 1000
+
+plugins:
+  selector:
+    polarismesh:
+      protocol: grpc
+      join_point: default
+      address_list: 127.0.0.1:8091
+#      persistDir: ./polarismesh/backup
+#      log_dir: ./polarismesh/log
+
+      service_router:
+        nearby_matchlevel: zone        # 就近路由的最小匹配级别，包括 region（大区）、zone（区域）、campus（园区）, 默认为 zone
+        percent_of_min_instances: 0.2  # 全死全活的最小健康实例例判断阈值，值的范围为 [0,1] 之间，默认为 0，即只有当所有实例都不健康时，才开启全死全活
+        need_return_all_nodes: false # 是否将所有节点展开成 registry.Node 返回，默认不展开，只在 metadata 中填充原始数据，防止节点过多影响性能
+      instance_location: # 注册实例的地址位置信息
+        region: China
+        zone: Guangdong
+        campus: Shenzhen

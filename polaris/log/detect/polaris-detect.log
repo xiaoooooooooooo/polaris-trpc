@@ -1,0 +1,3 @@
+2024-06-20 12:10:23.154613Z	info	detect	cbcheck/ticker.go:69	instances not initialized for {namespace: "zwx-test", service: "edu.imau.pb.UserService"}
+2024-06-20 12:10:26.011351Z	info	detect	cbcheck/ticker.go:69	instances not initialized for {namespace: "zwx-test", service: "edu.imau.pb.UserService"}
+2024-06-20 12:10:27.401929Z	info	detect	cbcheck/ticker.go:69	instances not initialized for {namespace: "zwx-test", service: "edu.imau.pb.UserService"}

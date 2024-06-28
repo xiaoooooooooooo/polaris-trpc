@@ -1,0 +1,28 @@
+server:
+  service:
+    - name: edu.imau.pb.UserService
+      ip: 127.0.0.1
+      #      nic: eth0
+      port: 9091
+      network: tcp
+      protocol: trpc
+      timeout: 1800
+
+plugins: # tRPC-Go plugin configuration.
+  registry:
+    polarismesh:
+      register_self: true
+      heartbeat_interval: 1000
+      protocol: grpc
+      address_list: 127.0.0.1:8091
+      service:
+        - name: edu.imau.pb.UserService
+          namespace: zwx-test
+          weight: 100
+          token: not_needed
+      instance_location: # 注册实例的地址位置信息
+        region: China
+        zone: Shanxi
+        campus: Xian
+
+

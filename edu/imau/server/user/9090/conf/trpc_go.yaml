@@ -1,0 +1,38 @@
+server:
+  service:
+    - name: edu.imau.pb.UserService
+      ip: 127.0.0.1
+      #      nic: eth0
+      port: 9090
+      network: tcp
+      protocol: trpc
+      timeout: 1800
+  admin:
+    ip: 127.0.0.1 # admin 的 ip，配置网卡 nic 也可以
+    port: 11014   # admin 的 port，必须同时配置这里的 ip port 才会启动 admin
+    read_timeout: 3000 # ms. 请求被接受到请求信息被完全读取的超时时间设置，防止慢客户端
+    write_timeout: 60000 # ms. 处理的超时时间
+
+# 测试一下就近访问
+plugins: # tRPC-Go plugin configuration.
+  registry:
+    polarismesh:
+      register_self: true
+      heartbeat_interval: 1000
+      protocol: grpc
+      address_list: 127.0.0.1:8091
+      service:
+        - name: edu.imau.pb.UserService
+          namespace: zwx-test
+          weight: 100
+          token: not_needed
+      instance_location: # 注册实例的地址位置信息
+        region: China
+        zone: Guangdong
+        campus: Shenzhen
+
+  log: # 所有日志配置
+    default: # 默认日志配置，log.Debug("xxx")
+      - writer: console  # 控制台标准输出 默认
+        formatter: console  # 标准输出日志的格式
+        level: debug  # 标准输出日志的级别
